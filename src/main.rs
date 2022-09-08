@@ -55,7 +55,7 @@ fn main() -> Result<(), anyhow::Error>
 
     let logfile = match env::var("IMGUP_LOGFILE") {
         Ok(s) => s,
-        Err(_) => env::var("HOME")? + "/.imgup_log",
+        Err(_) => env::var("HOME")? + "/imgup.log",
     };
     let mut logfile = fs::OpenOptions::new().append(true).create(true).open(logfile)?;
     writeln!(&mut logfile,
