@@ -41,7 +41,7 @@ fn main() -> Result<(), anyhow::Error>
     _ = clientidpath.pop();
     clientidpath.push("imgup.secret");
 
-    let clientid = fs::read_to_string(clientidpath).expect("Coudln't slurp secret file");
+    let clientid = fs::read_to_string(clientidpath).expect("Couldn't slurp secret file");
     let auth_value = format!("Client-ID {}", &clientid.trim());
     let res: ImgUrl = reqwest::blocking::Client::new()
         .post("https://api.imgur.com/3/image")
