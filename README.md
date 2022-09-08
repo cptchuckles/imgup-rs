@@ -1,7 +1,7 @@
 # imgup-rs
 
-This is a Rust CLI tool for pushing image files up to imgur and copying the URL to the system
-clipboard.
+This is a Rust CLI tool for pushing image files up to imgur ~~and copying the URL to the system
+clipboard~~.
 
 ## Installation
 
