@@ -37,11 +37,18 @@ fn main() -> Result<(), anyhow::Error>
     let mut image = HashMap::new();
     image.insert("image", &b64);
 
-    let mut clientidpath = env::current_exe().expect("Couldn't get executable path name");
-    _ = clientidpath.pop();
+    let mut clientidpath = env::current_exe()
+        .expect("Getting current_exe() path name")
+        .parent()
+        .expect("Getting parent of current_exe() path name")
+        .to_path_buf();
     clientidpath.push("imgup.secret");
 
-    let clientid = fs::read_to_string(clientidpath).expect("Couldn't slurp secret file");
+    let clientid = fs::read_to_string(&clientidpath).expect(&format!(
+        "Slurping contents of file at {}",
+        &clientidpath.to_string_lossy()
+    ));
+
     let auth_value = format!("Client-ID {}", &clientid.trim());
     let res: ImgUrl = reqwest::blocking::Client::new()
         .post("https://api.imgur.com/3/image")
