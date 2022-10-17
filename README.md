@@ -36,13 +36,16 @@ Delete: <hash>
 
 ### btw
 
-here is an example of a bash snippet that automatically copies the url to clipboard using `xclip`:
+here is an example of a bash script that automatically copies the url to clipboard using `xclip`:
 ```bash
-{ IFS= read -r url
+#!/bin/bash
+
+imgup "$1" |& {
+  IFS= read -r url
   IFS= read -r del
-} < <(imgup "$imagefile" 2>&1)
 
-xclip -sel c -i <<<"$url"
+  xclip -sel c -i <<<"$url"
 
-notify-send -t 60000 "Image uploaded" "$url\nDel: $del"
+  notify-send -t 60000 "Imgup" "$url\nDel: $del"
+}
 ```
